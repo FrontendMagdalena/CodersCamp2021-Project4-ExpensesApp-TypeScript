@@ -1,0 +1,11 @@
+{
+  "name": "CodersCamp2021-Project4-ExpensesApp-TypeScript",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start:client": "npm run -w @expenses/frontend start",
+    "start:server": "npm run -w @expenses/backend start"
+  }
+}
