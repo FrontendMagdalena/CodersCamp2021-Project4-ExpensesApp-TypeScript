@@ -4,13 +4,21 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useFetchDetail } from '../utils/hooks/useFetchDetail';
 import { updateAccountDetail } from '../utils/helpers/updateAccountView';
 
+interface IAccountFormData {
+  amount: string | null,
+  category: { value: string, label: string},
+  title: string,
+  date: string,
+  type: 'Wydatek' | 'Przychód',
+}
+
 export const EditView = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const account = useFetchDetail(id);
+  const account= useFetchDetail(id);
 
-  const handleSubmit = (data) => {
+  const handleSubmit = (data: IAccountFormData) => {
     const payload = {
       ...data,
       category: data.category.label,
