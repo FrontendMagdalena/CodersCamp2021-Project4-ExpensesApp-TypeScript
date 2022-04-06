@@ -8,10 +8,21 @@ import {
   StyledInputAttachment,
   StyledInputSelect,
 } from './Input.style';
-import { forwardRef } from 'react';
+import {forwardRef, FC, ChangeEvent} from 'react';
+
+interface IProps {
+    inputLabel?: string,
+      type: string,
+      placeholder?: string,
+      icon?: string,
+      name?: string,
+      value: string,
+      onChange: (e: ChangeEvent<HTMLInputElement>) => void,
+      onSearchClick?: () => void,
+}
 
 // eslint-disable-next-line react/display-name
-export const Input = forwardRef(
+export const Input: FC<IProps> = forwardRef(
   (
     {
       name,
@@ -55,18 +66,19 @@ export const Input = forwardRef(
   },
 );
 
-Input.propTypes = {
-  inputLabel: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  icon: PropTypes.string,
-  name: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  onSearchClick: PropTypes.func,
-};
+// Input.propTypes = {
+//   inputLabel: PropTypes.string,
+//   type: PropTypes.string.isRequired,
+//   placeholder: PropTypes.string,
+//   icon: PropTypes.string,
+//   name: PropTypes.string,
+//   value: PropTypes.string,
+//   onChange: PropTypes.func,
+//   onSearchClick: PropTypes.func,
+// };
 
-export const InputSelect = ({
+// TODO REMOVE ANY
+export const InputSelect: FC<any> = ({
   placeholder,
   inputLabel,
   value,
@@ -100,8 +112,8 @@ InputSelect.propTypes = {
   isClearable: PropTypes.bool,
   onCreateOption: PropTypes.func,
 };
-
-export const InputAttachment = ({ type, placeholder, inputLabel, icon }) => {
+// TODO REMOVE ANY
+export const InputAttachment: FC<any> = ({ type, placeholder, inputLabel, icon }) => {
   return (
     <>
       <StyledLabel htmlFor={inputLabel}>{inputLabel}</StyledLabel>
