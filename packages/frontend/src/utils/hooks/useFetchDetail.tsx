@@ -1,8 +1,9 @@
 import {useEffect, useState} from 'react';
 import {apiUrl, token} from '../serverURL';
+import {IAccount} from "../../reducers/accounts.reducer";
 
-export const useFetchDetail = (id) => {
-  const [account, setAccount] = useState(null);
+export const useFetchDetail = (id: string) => {
+  const [account, setAccount] = useState<IAccount | null>(null);
 
   useEffect(() => {
     getAccountDetail();

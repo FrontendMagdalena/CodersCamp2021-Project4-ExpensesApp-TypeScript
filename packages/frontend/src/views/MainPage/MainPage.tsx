@@ -9,20 +9,20 @@ import CategoryList from '../../components/CategoryList/CategoryList';
 import { Input } from '../../components/Input/Input';
 import { AccountsList } from '../../components/Accounts/AccountsList';
 import { AddButton } from '../../components/Button/Button';
-import { AccountsContext } from '../../reducers/accounts.reducer';
+import {AccountsContext, IAccount} from '../../reducers/accounts.reducer';
 import { StyledDate, StyledDateWrap } from './MainPage.styles';
 // @ts-ignore
 import Add from '../../assets/add.png';
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
-  const [dateStart, setDateStart] = useState('');
-  const [dateEnd, setDateEnd] = useState('');
-  const [category, setCategory] = useState('Wszystkie');
-  const [expenses, setExpenses] = useState(0);
-  const [incomes, setIncomes] = useState(0);
-  const [balance, setBalance] = useState(0);
+  const [name, setName] = useState<string>('');
+  const [dateStart, setDateStart] = useState<string>('');
+  const [dateEnd, setDateEnd] = useState<string>('');
+  const [category, setCategory] = useState<string>('Wszystkie');
+  const [expenses, setExpenses] = useState<number>(0);
+  const [incomes, setIncomes] = useState<number>(0);
+  const [balance, setBalance] = useState<number>(0);
   const token = JSON.parse((localStorage.getItem('user')) as string)?.token;
 
   useEffect(() => {
@@ -60,12 +60,11 @@ const MainPage = () => {
   };
 
   const { accountsState, limitsState } = useContext(AccountsContext);
-  // TODO REMOVE ANY
-  const [limits, limitsDispatch] = limitsState as any;
+  const [limits, limitsDispatch] = limitsState;
   const onSetShowAlert = () => limitsDispatch({ type: 'closeLastLimit' });
 
   const [list, dispatch] = accountsState;
-  const [listToShow, setListToShow] = useState(list);
+  const [listToShow, setListToShow] = useState<IAccount[]>(list);
   useEffect(() => {
     setListToShow(list);
     filterList();

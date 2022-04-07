@@ -7,8 +7,8 @@ import {
 } from '../../views/NewPosition/NewPosition.styles';
 import { Input, InputSelect, InputAttachment } from '../Input/Input';
 import { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { apiUrl } from '../../utils/serverURL';
+import {IAccount} from "../../reducers/accounts.reducer";
 
 const colors = [
   '#F4600C',
@@ -19,14 +19,28 @@ const colors = [
   '#57A14AFF',
 ];
 
-const getRandomInt = (min, max) => {
+const getRandomInt = (min: number, max: number) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 };
-const token = JSON.parse(localStorage.getItem('user'))?.token;
+const token = JSON.parse(localStorage.getItem('user') as string)?.token;
 
-export const AccountForm = ({ handleSubmit, account, buttonText }) => {
+interface IAccountFormData {
+  amount: string | null,
+  category: { value: string, label: string},
+  title: string,
+  date: string,
+  type: 'Wydatek' | 'Przychód',
+}
+
+interface IProps {
+  handleSubmit: (data: IAccountFormData) => void
+  account?: IAccount,
+  buttonText: string
+}
+
+export const AccountForm = ({ handleSubmit, account, buttonText }: IProps) => {
   const getInitialCategories = async () => {
     const response = await fetch(apiUrl.categories, {
       headers: {
@@ -36,7 +50,7 @@ export const AccountForm = ({ handleSubmit, account, buttonText }) => {
       },
     });
     const data = await response.json();
-    const translatedData = data.map((item) => {
+    const translatedData = data.map((item: {name: string}) => {
       return {
         ...item,
         label: item.name,
@@ -44,16 +58,16 @@ export const AccountForm = ({ handleSubmit, account, buttonText }) => {
       };
     });
     const initialCategory = translatedData.find(
-      (item) => item.label === account?.category,
+      (item: {label: string}) => item.label === account?.category,
     );
     initialCategory && setCategory(initialCategory);
     setCategoryList(translatedData);
   };
 
-  const [categoryList, setCategoryList] = useState([]);
+  const [categoryList, setCategoryList] = useState<{ value: string, label: string, color: string }[]>([]);
 
-  const addNewCategory = async (data) => {
-    const userID = JSON.parse(localStorage.getItem('user')).id;
+  const addNewCategory = async (data: {name: string, color: string, } ) => {
+    const userID = JSON.parse(localStorage.getItem('user') as string).id;
     const response = await fetch(apiUrl.categories, {
       method: 'POST',
       body: JSON.stringify({ ...data, userID }),
@@ -70,22 +84,21 @@ export const AccountForm = ({ handleSubmit, account, buttonText }) => {
     getInitialCategories();
   }, []);
 
-  console.log({ account });
   const formattedDate = account?.date
     ? new Date(account?.date).toISOString().slice(0, 10)
     : new Date().toISOString().slice(0, 10);
 
-  const [date, setDate] = useState(formattedDate);
-  const [type, setType] = useState(account?.type || 'Wydatek');
-  const [category, setCategory] = useState({ label: '', value: '' });
-  const [title, setTitle] = useState(account?.title || '');
+  const [date, setDate] = useState<string>(formattedDate);
+  const [type, setType] = useState<'Wydatek' | 'Przychód'>(account?.type || 'Wydatek');
+  const [category, setCategory] = useState<{ label: string, value: string }>({ label: '', value: '' });
+  const [title, setTitle] = useState<string>(account?.title || '');
   // TODO think how to remove console warning
-  const [amount, setAmount] = useState(account?.amount || null);
+  const [amount, setAmount] = useState<string | null>(account?.amount || null);
   // const [attachment, setAttachment] = useState(null);
 
   const handleCreate = useCallback(
     (inputValue) => {
-      const newValue = {
+      const newValue: { value: string, label: string, color: string } = {
         value: inputValue.toLowerCase(),
         label: inputValue,
         color: colors[getRandomInt(0, colors.length)],
@@ -162,7 +175,7 @@ export const AccountForm = ({ handleSubmit, account, buttonText }) => {
             type="file"
             inputLabel="Załącz plik"
             icon={'Attach'}
-            style="visibility:hidden"
+            // style="visibility:hidden"
           />
         </InputGroupStyled>
         <PrimaryButton
@@ -176,8 +189,3 @@ export const AccountForm = ({ handleSubmit, account, buttonText }) => {
   );
 };
 
-AccountForm.propTypes = {
-  handleSubmit: PropTypes.func,
-  account: PropTypes.object,
-  buttonText: PropTypes.string,
-};

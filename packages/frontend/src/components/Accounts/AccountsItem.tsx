@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   ItemBox,
   StyledText,
@@ -12,8 +11,16 @@ import {
 } from './AccountsItem.styles';
 import pen from './pen.png';
 import trash from './trash.png';
+import {IAccount} from "../../reducers/accounts.reducer";
 
-export const AccountsItem = (props) => {
+interface IProps {
+  item: IAccount,
+  onEditClick: (e: React.MouseEvent<HTMLElement>)=> void,
+  odDeleteClick: (e: React.MouseEvent<HTMLElement>)=> void,
+  onClick: ()=> void,
+};
+
+export const AccountsItem = (props: IProps) => {
   const { onEditClick, odDeleteClick, item, onClick } = props;
   const { date, title, amount, type } = item;
   const formattedDate = new Date(date).toISOString().slice(0, 10);
@@ -40,16 +47,3 @@ export const AccountsItem = (props) => {
   );
 };
 
-AccountsItem.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.string,
-    date: PropTypes.string,
-    title: PropTypes.string,
-    category: PropTypes.string,
-    type: PropTypes.string,
-    amount: PropTypes.number,
-  }),
-  onEditClick: PropTypes.func,
-  odDeleteClick: PropTypes.func,
-  onClick: PropTypes.func,
-};

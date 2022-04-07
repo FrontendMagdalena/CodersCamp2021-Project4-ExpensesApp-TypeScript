@@ -1,8 +1,12 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { StyledLimit, StyledIcon, StyledText } from './Limit.styles';
+import {ILimit} from "../../reducers/accounts.reducer";
 
-export default function Limit({ limitList }) {
+interface ILimitProps {
+  limitList: ILimit['list']
+};
+
+export default function Limit({ limitList }: ILimitProps) {
   const [showAlert, setShowAlert] = useState(false);
 
   const reachedLimits = Object.entries(limitList).map((limit) => {
@@ -51,7 +55,3 @@ export default function Limit({ limitList }) {
     </>
   );
 }
-
-Limit.propTypes = {
-  limitList: PropTypes.object,
-};

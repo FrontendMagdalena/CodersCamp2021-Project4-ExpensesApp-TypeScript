@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   DetailContainer,
   NameOfExpense,
@@ -12,8 +11,15 @@ import {
 } from './AccountDetail.styles.js';
 import penBig from './penBig.png';
 import trashBig from './trashBig.png';
+import {IAccount} from "../../reducers/accounts.reducer";
 
-export const AccountDetail = (props) => {
+interface IProps {
+  item: IAccount
+  onEditClick: () => void,
+  odDeleteClick: () => void,
+}
+
+export const AccountDetail = (props: IProps) => {
   const { onEditClick, odDeleteClick, item } = props;
   const { date, title, amount, type, category } = item;
   const formattedDate = new Date(date).toISOString().slice(0, 10);
@@ -42,17 +48,4 @@ export const AccountDetail = (props) => {
       </IconsContainer>
     </DetailContainer>
   );
-};
-
-AccountDetail.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.string,
-    date: PropTypes.string,
-    title: PropTypes.string,
-    category: PropTypes.string,
-    type: PropTypes.string,
-    amount: PropTypes.number,
-  }),
-  onEditClick: PropTypes.func,
-  odDeleteClick: PropTypes.func,
 };

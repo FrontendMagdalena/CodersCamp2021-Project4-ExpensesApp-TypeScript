@@ -65,9 +65,9 @@ export const users = [
     },
 ];
 
-interface IAccount {
+export interface IAccount {
     _id: string,
-    amount: number,
+    amount: string,
     category: string,
     title: string,
     date: string,
@@ -75,10 +75,31 @@ interface IAccount {
     type: 'Wydatek' | 'Przychód',
 }
 
-interface IAccountsAction {
+export interface IAccountsAction {
     type: 'setInitialAccount' | 'addNewAccount' | 'deleteAccount',
     payload?: {
         id: string
+    }
+}
+
+export interface ILimit {
+    list: {
+        [category: string]: {
+            value: number,
+            reached: boolean
+        },
+    },
+    lastReachedLimit?: {
+        label: string,
+        closed: boolean,
+    },
+}
+
+interface ILimitAction {
+    type: 'addLimit' | 'reachedLimit' | 'closeLastLimit',
+    payload?: {
+       category: string,
+        amount: string
     }
 }
 
@@ -87,14 +108,13 @@ export interface IAccountState {
         list: IAccount[],
         dispatch: ({type, payload}: {type: string, payload?: {}}) => void],
     limitsState: [
-        // TODO REMOVE ANY
-        limits: any[],
-        dispatch: ({type}: {type: string}) => void],
+        limits: ILimit,
+        dispatch: ({type, payload}: {type: string, payload?: {category: string}} ) => void],
 }
 
 export const AccountsContext = createContext<IAccountState>({
     accountsState: [[], () => null],
-    limitsState: [[], () => null]
+    limitsState: [{list: {}}, () => null]
 });
 
 export const accountsReducer = (state: IAccount[], action: IAccountsAction) => {
@@ -122,8 +142,8 @@ export const accountsReducer = (state: IAccount[], action: IAccountsAction) => {
             return state;
     }
 };
-// TODO REMOVE ANY
-export const limitsReducer = (state: any, action: any) => {
+
+export const limitsReducer = (state: ILimit, action: ILimitAction) => {
     let newValue;
 
     switch (action.type) {
@@ -132,8 +152,8 @@ export const limitsReducer = (state: any, action: any) => {
                 ...state,
                 list: {
                     ...state.list,
-                    [action.payload.category]: {
-                        value: parseInt(action.payload.amount, 10),
+                    [action.payload!.category]: {
+                        value: parseInt(action.payload!.amount, 10),
                         reached: false,
                     },
                 },
@@ -145,13 +165,13 @@ export const limitsReducer = (state: any, action: any) => {
                 ...state,
                 list: {
                     ...state.list,
-                    [action.payload.category]: {
-                        value: state.list[action.payload.category].value,
+                    [action.payload!.category]: {
+                        value: state.list![action.payload!.category].value,
                         reached: true,
                     },
                 },
                 lastReachedLimit: {
-                    label: action.payload.category,
+                    label: action.payload!.category,
                     closed: false,
                 },
             };
@@ -161,7 +181,7 @@ export const limitsReducer = (state: any, action: any) => {
             newValue = {
                 ...state,
                 lastReachedLimit: {
-                    label: state.lastReachedLimit.label,
+                    label: state.lastReachedLimit?.label,
                     closed: true,
                 },
             };

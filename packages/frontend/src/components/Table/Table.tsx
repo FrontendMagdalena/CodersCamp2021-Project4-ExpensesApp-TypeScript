@@ -1,7 +1,11 @@
-import PropTypes from 'prop-types';
 import { StyledTable } from './Table.styles';
 
-export default function Table({ expenses, incomes, balance }) {
+interface IProps {
+  expenses: number,
+  incomes: number,
+  balance: number,
+}
+export default function Table({ expenses, incomes, balance }: IProps) {
   return (
     <StyledTable>
       <thead>
@@ -22,10 +26,10 @@ export default function Table({ expenses, incomes, balance }) {
   );
 }
 
-Table.propTypes = {
-  expenses: PropTypes.number,
-  incomes: PropTypes.number,
-  balance: PropTypes.number,
-  getBalance: PropTypes.func,
-  response: PropTypes.object,
-};
+// Table.propTypes = {
+//   expenses: PropTypes.number,
+//   incomes: PropTypes.number,
+//   balance: PropTypes.number,
+//   getBalance: PropTypes.func,
+//   response: PropTypes.object,
+// };
