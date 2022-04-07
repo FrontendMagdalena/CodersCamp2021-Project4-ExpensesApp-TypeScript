@@ -75,15 +75,15 @@ export interface IAccount {
     type: 'Wydatek' | 'Przychód',
 }
 
-interface IAccountsAction {
+export interface IAccountsAction {
     type: 'setInitialAccount' | 'addNewAccount' | 'deleteAccount',
     payload?: {
         id: string
     }
 }
 
-interface ILimit {
-    list?: {
+export interface ILimit {
+    list: {
         [category: string]: {
             value: number,
             reached: boolean
@@ -109,12 +109,12 @@ export interface IAccountState {
         dispatch: ({type, payload}: {type: string, payload?: {}}) => void],
     limitsState: [
         limits: ILimit,
-        dispatch: ({type, payload}: {type: string, payload: {category: string}} ) => void],
+        dispatch: ({type, payload}: {type: string, payload?: {category: string}} ) => void],
 }
 
 export const AccountsContext = createContext<IAccountState>({
     accountsState: [[], () => null],
-    limitsState: [{}, () => null]
+    limitsState: [{list: {}}, () => null]
 });
 
 export const accountsReducer = (state: IAccount[], action: IAccountsAction) => {

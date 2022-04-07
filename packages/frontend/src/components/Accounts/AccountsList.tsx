@@ -1,11 +1,16 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AccountsItem } from './AccountsItem';
 import { useNavigate } from 'react-router-dom';
 import { StyledButton } from './AccountsList.styles';
-import PropTypes from 'prop-types';
 import { deleteAccountDetail } from '../../utils/helpers/deleteAccountDetail';
+import {IAccount} from "../../reducers/accounts.reducer";
 
-export const AccountsList = ({ list, dispatch }) => {
+interface IProps {
+  list: IAccount[],
+  dispatch: ({type, payload}: {type: string, payload?: {} | undefined}) => void
+}
+
+export const AccountsList = ({ list, dispatch }: IProps) => {
   const lastFive = list.slice(Math.max(list.length - 5, 0)).reverse();
   const navigate = useNavigate();
   const [accountList, setAccountList] = useState(lastFive);
@@ -49,7 +54,3 @@ export const AccountsList = ({ list, dispatch }) => {
   );
 };
 
-AccountsList.propTypes = {
-  list: PropTypes.array.isRequired,
-  dispatch: PropTypes.func,
-};

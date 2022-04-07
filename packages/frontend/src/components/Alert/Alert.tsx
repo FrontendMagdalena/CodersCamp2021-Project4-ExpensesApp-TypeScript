@@ -1,8 +1,12 @@
-import PropTypes from 'prop-types';
 import { PrimaryButton } from '../Button/Button';
 import { StyledAlert, StyledTitle, StyledText } from './Alert.styles';
 
-export default function Alert({ category, onSetShowAlert }) {
+interface IAlert {
+    category: string,
+    onSetShowAlert: () => void,
+};
+
+export default function Alert({ category, onSetShowAlert }: IAlert) {
   return (
     <StyledAlert>
       <StyledTitle>ALERT</StyledTitle>
@@ -17,8 +21,3 @@ export default function Alert({ category, onSetShowAlert }) {
     </StyledAlert>
   );
 }
-
-Alert.propTypes = {
-  category: PropTypes.string.isRequired,
-  onSetShowAlert: PropTypes.func,
-};

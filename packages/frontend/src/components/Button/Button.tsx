@@ -7,7 +7,6 @@ import {
   StyledIconButtonText,
   StyledIconAddButton,
 } from './Button.styles';
-import PropTypes from 'prop-types';
 
 /* props text to wyświetlany tekst; props isActive jesli false jest wyszarzony; props primary może być użyty do stylowania innych buttonów niż standardowe*/
 
@@ -15,7 +14,7 @@ interface IPrimaryButton {
   className: string,
   text: string,
   isActive: boolean,
-  onClick: () => void,
+  onClick?: () => void,
   alert?: boolean,
 }
 
@@ -81,28 +80,26 @@ export const IconButton = (props: IIconButton) => {
   return <StyledIconButton type={props.type} onClick={props.onClick} />;
 };
 
-//TODO Add Types
-export const AddButton = (props: any) => {
+interface IAddButton {
+  text: string,
+  imageName: string,
+  alt?: string,
+  isSmall?: boolean
+  onClick: () => void,
+};
+
+
+export const AddButton = (props: IAddButton) => {
+  const {text, imageName, alt, isSmall = false, onClick } = props;
   return (
-    <StyledIconButtonWrap onClick={props.onClick}>
-      <StyledIconButtonText>{props.text}</StyledIconButtonText>
+    <StyledIconButtonWrap onClick={onClick}>
+      <StyledIconButtonText>{text}</StyledIconButtonText>
       <StyledIconAddButton
-        src={props.imageName}
+        src={imageName}
         alt=""
-        isSmall={props.isSmall}
+        isSmall={isSmall}
       />
     </StyledIconButtonWrap>
   );
 };
 
-AddButton.propTypes = {
-  text: PropTypes.string,
-  imageName: PropTypes.string,
-  alt: PropTypes.string,
-  isSmall: PropTypes.bool,
-  onClick: PropTypes.func,
-};
-
-IconButton.defaultProps = {
-  isSmall: false,
-};
