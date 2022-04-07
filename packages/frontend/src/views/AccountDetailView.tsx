@@ -4,11 +4,12 @@ import { IconButton } from '../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { useFetchDetail } from '../utils/hooks/useFetchDetail';
 import { deleteAccountDetail } from '../utils/helpers/deleteAccountDetail';
+import {IAccount} from "../reducers/accounts.reducer";
 
 export const AccountDetailView = () => {
-  const { id } = useParams();
+  const { id } = useParams() as { id: string };
   const navigate = useNavigate();
-  const account = useFetchDetail(id);
+  const account: IAccount | null= useFetchDetail(id);
 
   if (account) {
     return (

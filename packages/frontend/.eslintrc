@@ -4,13 +4,20 @@
     "es2021": true,
     "jest": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier"
+  ],
   "rules": {
-    "semi": ["error", "always"],
+    "semi": [
+      "error",
+      "always"
+    ],
     "react/react-in-jsx-scope": "off",
     "no-undef": "off",
-    "react/prop-types": "off"
-
+    "react/prop-types": "off",
+    "no-unused-vars": "off"
   },
   "parserOptions": {
     "sourceType": "module"
