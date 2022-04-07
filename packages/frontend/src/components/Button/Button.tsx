@@ -33,18 +33,6 @@ export const PrimaryButton = (props: IPrimaryButton) => {
     </PrimaryStyledButton>
   );
 };
-//
-// PrimaryButton.propTypes = {
-//   className: PropTypes.string.isRequired,
-//   text: PropTypes.string.isRequired,
-//   isActive: PropTypes.bool.isRequired,
-//   onClick: PropTypes.func,
-//   alert: PropTypes.bool,
-// };
-//
-// PrimaryButton.defaultProps = {
-//   isActive: true,
-// };
 
 interface IButtonExpenses {
     text: 'Wydatek' | 'Przychód',
@@ -65,16 +53,6 @@ export const ButtonExpenses = (props : IButtonExpenses) => {
   );
 };
 
-// ButtonExpenses.propTypes = {
-//   className: PropTypes.oneOf(['Wydatek']),
-//   text: PropTypes.string.isRequired,
-//   isActive: PropTypes.bool.isRequired,
-//   onClick: PropTypes.func,
-// };
-//
-// ButtonExpenses.defaultProps = {
-//   isActive: true,
-// };
 interface IButtonIncome {
   text: 'Wydatek' | 'Przychód',
   isActive: boolean,
@@ -94,17 +72,6 @@ export const ButtonIncome = (props: IButtonIncome) => {
   );
 };
 
-// ButtonIncome.propTypes = {
-//   className: PropTypes.oneOf(['Przychody']),
-//   text: PropTypes.string.isRequired,
-//   isActive: PropTypes.bool.isRequired,
-//   onClick: PropTypes.func,
-// };
-//
-// ButtonIncome.defaultProps = {
-//   isActive: true,
-// };
-
 interface IIconButton {
     type: 'arrow' | 'arrowd' | 'add' | 'glass' | 'edit'| 'delete',
     onClick: () => void,
@@ -114,11 +81,7 @@ export const IconButton = (props: IIconButton) => {
   return <StyledIconButton type={props.type} onClick={props.onClick} />;
 };
 
-// IconButton.propTypes = {
-//   type: PropTypes.oneOf(['arrow', 'arrowd', 'add', 'glass', 'edit', 'delete']),
-//   onClick: PropTypes.func,
-// };
-
+//TODO Add Types
 export const AddButton = (props: any) => {
   return (
     <StyledIconButtonWrap onClick={props.onClick}>
