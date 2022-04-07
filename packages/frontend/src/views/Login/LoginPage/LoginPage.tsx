@@ -1,6 +1,6 @@
-import { useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { EMAIL_VERIFICATION_REGEX } from '../../../utils/helpers/validation.helpers';
 import { Input } from '../../../components/Input/Input';
 import { PrimaryButton } from '../../../components/Button/Button';
@@ -22,18 +22,23 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [userMessage, setUserMessage] = useState('');
 
+  type FormInputs = {
+    email: string;
+    password: string;
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormInputs>();
 
-  const onClick = (page) => {
+  const onClick = (page: string) => {
     navigate(`/${page}`);
   };
 
-  const onSubmit = (userData, event) => {
-    const form = event.target;
+  const onSubmit: SubmitHandler<FormInputs> = (userData, event) => {
+    const form = event?.target;
 
     fetch(`${serverURL}/api/v1/users/login`, {
       method: 'POST',
@@ -48,9 +53,9 @@ export default function LoginPage() {
           const user = {
             email: data.userExist.email,
             id: data.userExist._id,
-            token: data.token
+            token: data.token,
           };
-          localStorage.setItem('userLogged', true);
+          localStorage.setItem('userLogged', 'true');
           localStorage.setItem('user', JSON.stringify(user));
           navigate('/main');
         } else {
@@ -61,7 +66,9 @@ export default function LoginPage() {
       .catch((error) => {
         form.reset();
         console.log('Error:', error);
-        setUserMessage('Wykryto problem podczas łączenia z serwerem. Spróbuj ponownie później.');
+        setUserMessage(
+          'Wykryto problem podczas łączenia z serwerem. Spróbuj ponownie później.',
+        );
         form.reset();
       });
   };
@@ -77,7 +84,7 @@ export default function LoginPage() {
         <StyledValidation>
           <Input
             type="email"
-            name="email"
+            // name="email"
             inputLabel="e-mail:"
             {...register('email', {
               required: 'Adres e-mail jest wymagany',
@@ -93,7 +100,7 @@ export default function LoginPage() {
           <Input
             type="password"
             inputLabel="hasło:"
-            name="password"
+            // name="password"
             {...register('password', {
               required: 'Wpisz hasło, minimum 7 znaków',
               minLength: {
