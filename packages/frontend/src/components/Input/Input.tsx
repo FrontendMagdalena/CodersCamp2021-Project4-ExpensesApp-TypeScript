@@ -15,7 +15,7 @@ interface IProps {
     placeholder?: string,
     icon?: string,
     name?: string,
-    value: string | number | null
+    value?: string | number | null
     onChange: (e: ChangeEvent<HTMLInputElement>) => void,
     onSearchClick?: () => void,
 }

@@ -20,9 +20,9 @@ export default function Settings() {
     setError,
     formState: { errors },
   } = useForm({});
-  const [title, setTitle] = useState('Zmień hasło:');
+  const [title, setTitle] = useState<string>('Zmień hasło:');
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: Record<string, string> )=> {
     if (data.newPassword === data.lastPassword) {
       setError('newPassword', {
         type: 'manual',
@@ -43,7 +43,7 @@ export default function Settings() {
       return;
     }
 
-    const userID = JSON.parse(localStorage.getItem('user')).id;
+    const userID = JSON.parse(localStorage.getItem('user') as string).id;
 
     fetch(`${serverURL}/api/v1/users/update-password`, {
       method: 'PATCH',
@@ -79,7 +79,6 @@ export default function Settings() {
         <StyledValidation>
           <Input
             type="password"
-            name="lastPassword"
             inputLabel="Bieżące hasło:"
             {...register('lastPassword', {
               required: 'Wpisz hasło, minimum 7 znaków',
@@ -93,7 +92,6 @@ export default function Settings() {
         </StyledValidation>
         <StyledValidation>
           <Input
-            name="newPassword"
             type="password"
             inputLabel="Nowe hasło:"
             {...register('newPassword', {
@@ -108,7 +106,6 @@ export default function Settings() {
         </StyledValidation>
         <StyledValidation>
           <Input
-            name="repeatedPassword"
             type="password"
             inputLabel="Powtórz nowe hasło:"
             {...register('repeatedPassword', {
