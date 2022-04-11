@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 
+
 export const StyledDiv = styled.div`
   margin-top: 200px;
   padding: 30px 20px 0;
