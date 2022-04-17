@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '../../components/Input/Input';
 import { PrimaryButton } from '../../components/Button/Button';
@@ -21,14 +21,20 @@ export default function ResetPasswordPage() {
   const [showResetButton, setShowResetButton] = useState(true);
   const navigate = useNavigate();
 
+  type FormInputs = {
+    email: string;
+    password: string;
+    passwordSecond: string;
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormInputs>();
 
-  const onSubmit = (data, event) => {
-    const form = event.target;
+  const onSubmit: SubmitHandler<FormInputs> = (data, event) => {
+    const form = event?.target;
 
     setUserEmail(data.email);
     fetch(`${serverURL}/api/v1/users/reset-password`, {
@@ -68,7 +74,6 @@ export default function ResetPasswordPage() {
           <StyledValidation>
             <Input
               type="email"
-              name="email"
               inputLabel="e-mail:"
               {...register('email', {
                 required: 'Adres e-mail jest wymagany',
