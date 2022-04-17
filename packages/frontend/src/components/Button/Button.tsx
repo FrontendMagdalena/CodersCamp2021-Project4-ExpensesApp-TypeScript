@@ -16,7 +16,7 @@ interface IPrimaryButton {
   isActive: boolean;
   onClick?: () => void;
   alert?: boolean;
-  type?: 'submit' | 'text' | 'reset';
+  type?: 'submit' | 'reset';
 }
 
 export const PrimaryButton = (props: IPrimaryButton) => {

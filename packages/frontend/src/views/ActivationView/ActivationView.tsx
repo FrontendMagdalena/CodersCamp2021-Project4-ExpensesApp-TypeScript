@@ -9,10 +9,15 @@ import {
 import { serverURL } from '../../utils/serverURL';
 import { useEffect, useState } from 'react';
 
+interface ActivationView {
+  id: string;
+}
+
+
 const ActivationView = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [activationState, setActivationState] = useState('loading');
+  const [activationState, setActivationState] = useState<string>('loading');
 
   useEffect(() => {
     setActivationState('loading');
