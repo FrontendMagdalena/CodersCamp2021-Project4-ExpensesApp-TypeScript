@@ -11,7 +11,7 @@ import {
 /* props text to wyświetlany tekst; props isActive jesli false jest wyszarzony; props primary może być użyty do stylowania innych buttonów niż standardowe*/
 
 interface IPrimaryButton {
-  className: string;
+  className?: string;
   text: string;
   isActive: boolean;
   onClick?: () => void;
