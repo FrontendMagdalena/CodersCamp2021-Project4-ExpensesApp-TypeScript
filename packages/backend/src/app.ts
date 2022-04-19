@@ -14,7 +14,7 @@ mongoose.connect(process.env.DATABASE_URL, () =>
 );
 const db = mongoose.connection;
 
-db.on('error', (error) => console.error(error));
+db.on('error', (error: string) => console.error(error));
 
 app.use(express.json());
 

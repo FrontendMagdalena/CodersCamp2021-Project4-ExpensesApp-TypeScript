@@ -1,7 +1,4 @@
-/* eslint-disable */
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { AccountsContext } from '../../../reducers/accounts.reducer';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { PrimaryButton } from '../../../components/Button/Button';
 import { Input } from '../../../components/Input/Input';
 import {
@@ -16,26 +13,31 @@ import {
 import icon from '../../../assets/Icon.png';
 import { EMAIL_VERIFICATION_REGEX } from '../../../utils/helpers/validation.helpers';
 import { StyledMessage } from '../LoginPage/LoginPage.styles';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { serverURL } from '../../../utils/serverURL';
 
 export default function LoginPage() {
-  const { users } = useContext(AccountsContext);
-  const navigate = useNavigate();
   const [userMessage, setUserMessage] = useState('');
   const [registerState, setRegisterState] = useState({
     show: false,
     state: false,
     msg: '',
   });
+
+  type FormInputs = {
+    email: string;
+    password: string;
+    passwordSecond: string;
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormInputs>();
 
-  const onSubmit = (userData, event) => {
-    const form = event.target;
+  const onSubmit: SubmitHandler<FormInputs> = (userData, event) => {
+    const form = event?.target;
     if (userData.password === userData.passwordSecond) {
       fetch(`${serverURL}/api/v1/users/register`, {
         method: 'POST',
@@ -47,14 +49,14 @@ export default function LoginPage() {
         .then((res) => res.json())
         .then((data) => {
           if (data.code) {
-            form.reset()
+            form.reset();
             setRegisterState({
               show: true,
               state: true,
               msg: 'Na podany adres email został wysłany link do aktywacji konta.',
             });
           } else {
-            form.reset()
+            form.reset();
             setRegisterState({
               show: true,
               state: false,
@@ -63,7 +65,7 @@ export default function LoginPage() {
           }
         })
         .catch((error) => {
-          form.reset()
+          form.reset();
           console.log('Error:', error);
           setRegisterState({
             show: true,
@@ -71,8 +73,6 @@ export default function LoginPage() {
             msg: 'Wykryto problem podczas łączenia z serwerem, sprobój ponownie później.',
           });
         });
-
-      // navigate('/main');
     } else {
       setUserMessage('Podane hasła muszą być identyczne');
     }
@@ -96,7 +96,6 @@ export default function LoginPage() {
         <StyledValidation>
           <Input
             type="text"
-            name="email"
             inputLabel="e-mail:"
             {...register('email', {
               required: 'Adres e-mail jest wymagany',
@@ -111,7 +110,6 @@ export default function LoginPage() {
         <StyledValidation>
           <Input
             type="password"
-            name="password"
             inputLabel="hasło:"
             {...register('password', {
               required: 'Wpisz hasło, minimum 7 znaków',
@@ -125,7 +123,6 @@ export default function LoginPage() {
         </StyledValidation>
         <StyledValidation>
           <Input
-            name="passwordSecond"
             type="password"
             inputLabel="powtórz hasło:"
             {...register('passwordSecond', {
