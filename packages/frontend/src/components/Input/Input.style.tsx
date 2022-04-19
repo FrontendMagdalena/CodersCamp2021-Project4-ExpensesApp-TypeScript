@@ -3,7 +3,6 @@ import glass from '../../assets/magnifying-glass.png';
 import ArrowD from '../../assets/arrowd.png';
 import Attach from '../../assets/attach.png';
 import CreatableSelect from 'react-select/creatable';
-import {IInputProps} from "./Input";
 
 export const StyledInput = styled.input`
   width: 100%;
