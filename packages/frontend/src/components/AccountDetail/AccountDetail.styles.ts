@@ -33,7 +33,7 @@ export const PropsRow = styled.p`
     font-size: 18px;
 `;
 
-export const StyledAmountColor = styled.p` 
+export const StyledAmountColor = styled.p<{isExpense: boolean}>` 
     color: ${(props) => (props.isExpense ? '#F4600C' : '#05510D')};
     font-weight: 600; 
     font-size: 20px;

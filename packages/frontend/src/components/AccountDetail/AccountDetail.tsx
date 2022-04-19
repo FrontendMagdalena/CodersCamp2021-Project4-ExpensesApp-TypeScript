@@ -8,7 +8,7 @@ import {
   IconsContainer,
   ConfirmationStyle,
   StyledImg,
-} from './AccountDetail.styles.js';
+} from './AccountDetail.styles';
 import penBig from './penBig.png';
 import trashBig from './trashBig.png';
 import {IAccount} from "../../reducers/accounts.reducer";

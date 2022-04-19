@@ -3,6 +3,7 @@ import glass from '../../assets/magnifying-glass.png';
 import ArrowD from '../../assets/arrowd.png';
 import Attach from '../../assets/attach.png';
 import CreatableSelect from 'react-select/creatable';
+import {IInputProps} from "./Input";
 
 export const StyledInput = styled.input`
   width: 100%;
@@ -39,7 +40,7 @@ export const StyledLabel = styled.label`
   color: #6a5f5f;
 `;
 
-export const StyledInputGroup = styled.div`
+export const StyledInputGroup = styled.div<{icon: boolean}>`
   padding: 5px 10px;
   border: 2px solid #6a5f5f;
   border-radius: 15px;
@@ -61,27 +62,27 @@ export const StyledInputGroup = styled.div`
   `};
 `;
 
-export const StyledInputGroupCategory = styled.div`
-  min-width: 158px;
-  padding: 2px 10px;
-  border: 2px solid #6a5f5f;
-  border-radius: 15px;
-
-  ${({ icon }) =>
-    icon &&
-    `
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 22px;
-
-    & > button {
-      background-image: url('${ArrowD}');
-      width: 33px;
-      height: 33px;
-    }
-  `};
-`;
+// export const StyledInputGroupCategory = styled.div`
+//   min-width: 158px;
+//   padding: 2px 10px;
+//   border: 2px solid #6a5f5f;
+//   border-radius: 15px;
+//
+//   ${({ icon }) =>
+//     icon &&
+//     `
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     margin-bottom: 22px;
+//
+//     & > button {
+//       background-image: url('${ArrowD}');
+//       width: 33px;
+//       height: 33px;
+//     }
+//   `};
+// `;
 
 export const StyledInputAttachment = styled.input`
   width: 100%;
@@ -95,7 +96,7 @@ export const StyledInputAttachment = styled.input`
     
     `}
 `;
-export const StyledInputGroupAttachment = styled.div`
+export const StyledInputGroupAttachment = styled.div<{icon: boolean}>`
   min-width: 158px;
   min-height: 50px;
   border: 2px solid #6a5f5f;

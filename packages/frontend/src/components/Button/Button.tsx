@@ -23,7 +23,6 @@ export const PrimaryButton = (props: IPrimaryButton) => {
   return (
     <PrimaryStyledButton
       className={className}
-      text={text}
       isActive={isActive}
       onClick={onClick}
       alert={alert}
@@ -71,7 +70,7 @@ export const ButtonIncome = (props: IButtonIncome) => {
   );
 };
 
-interface IIconButton {
+export interface IIconButton {
     type: 'arrow' | 'arrowd' | 'add' | 'glass' | 'edit'| 'delete',
     onClick: () => void,
 };

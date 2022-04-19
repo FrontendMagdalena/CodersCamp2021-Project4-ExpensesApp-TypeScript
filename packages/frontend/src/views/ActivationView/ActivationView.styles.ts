@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import {string} from "prop-types";
 
 export const StyledDiv = styled.div`
   margin-top: 200px;
@@ -8,7 +9,7 @@ export const StyledDiv = styled.div`
   border-radius: 15px;
 `;
 
-export const StyledHeading = styled.h3`
+export const StyledHeading = styled.h3<{success: string}>`
   font-size: 40px;
   color: green;
   text-transform: uppercase;

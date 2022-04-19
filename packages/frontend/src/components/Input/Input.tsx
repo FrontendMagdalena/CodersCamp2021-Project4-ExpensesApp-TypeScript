@@ -7,9 +7,9 @@ import {
     StyledInputAttachment,
     StyledInputSelect,
 } from './Input.style';
-import {forwardRef, FC, ChangeEvent} from 'react';
+import {forwardRef, FC, ChangeEvent, ForwardedRef} from 'react';
 
-interface IProps {
+export interface IInputProps {
     inputLabel?: string,
     type: string,
     placeholder?: string,
@@ -34,6 +34,7 @@ interface IInputSelect {
     isClearable?: boolean,
     onCreateOption?: (inputValue: []) => void,
 }
+
 interface IInputAttachment {
     inputLabel: string,
     type: string,
@@ -42,7 +43,8 @@ interface IInputAttachment {
 }
 
 // eslint-disable-next-line react/display-name
-export const Input: FC<IProps> = forwardRef(
+//any on purpose because I couldn't make it works properly
+export const Input: FC<any> = forwardRef(
     (
         {
             name,
@@ -85,15 +87,15 @@ export const Input: FC<IProps> = forwardRef(
         );
     },
 );
-
-export const InputSelect: FC<IInputSelect> = ({
-                                                      placeholder,
-                                                      inputLabel,
-                                                      value,
-                                                      onChange,
-                                                      options,
-                                                      isClearable,
-                                                      onCreateOption,
+//any on purpose because I couldn't make it works properly
+export const InputSelect: FC<any> = ({
+                                                  placeholder,
+                                                  inputLabel,
+                                                  value,
+                                                  onChange,
+                                                  options,
+                                                  isClearable,
+                                                  onCreateOption,
                                               }) => {
     return (
         <>
@@ -121,7 +123,7 @@ export const InputAttachment: FC<IInputAttachment> = ({type, placeholder, inputL
                     placeholder={placeholder ? placeholder : ''}
                     id={inputLabel}
                 />
-                {icon ? <button/>: ''}
+                {icon ? <button/> : ''}
             </StyledInputGroupAttachment>
         </>
     );

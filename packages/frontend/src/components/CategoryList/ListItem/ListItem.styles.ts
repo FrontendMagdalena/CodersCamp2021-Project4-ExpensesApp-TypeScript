@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
-export const StyledItem = styled.button`
+export const StyledItem = styled.button<{
+  bgColor: string,
+  onClick: () => void,
+  isActive: boolean
+}> `
   margin: 0 4px;
   padding: 6px 18px;
   font-size: 14px;
   text-align: center;
   color: white;
-  background-color: ${(props) => props.bgcolor};
+  background-color: ${(props) => props.bgColor};
   border-radius: 15px;
   border: ${(props) => (props.isActive ? 'solid #6a5f5f 2px' : '')};
 `;
