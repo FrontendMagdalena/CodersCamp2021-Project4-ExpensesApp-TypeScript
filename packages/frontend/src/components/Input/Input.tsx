@@ -34,6 +34,7 @@ interface IInputSelect {
   isClearable?: boolean;
   onCreateOption?: (inputValue: []) => void;
 }
+
 interface IInputAttachment {
   inputLabel: string;
   type: string;
@@ -41,8 +42,9 @@ interface IInputAttachment {
   icon?: string;
 }
 
+//any on purpose because I couldn't make it works properly
 // eslint-disable-next-line react/display-name
-export const Input: FC<IProps> = forwardRef(
+export const Input: FC<any> = forwardRef(
   (
     {
       name,
@@ -86,7 +88,8 @@ export const Input: FC<IProps> = forwardRef(
   },
 );
 
-export const InputSelect: FC<IInputSelect> = ({
+//any on purpose because I couldn't make it works properly
+export const InputSelect: FC<any> = ({
   placeholder,
   inputLabel,
   value,

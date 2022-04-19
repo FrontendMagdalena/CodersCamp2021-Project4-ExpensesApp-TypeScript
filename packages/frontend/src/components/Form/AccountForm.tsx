@@ -6,7 +6,7 @@ import {
   InputGroupStyled,
 } from '../../views/NewPosition/NewPosition.styles';
 import { Input, InputSelect, InputAttachment } from '../Input/Input';
-import { useCallback, useEffect, useState } from 'react';
+import {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import { apiUrl } from '../../utils/serverURL';
 import {IAccount} from "../../reducers/accounts.reducer";
 
@@ -135,7 +135,7 @@ export const AccountForm = ({ handleSubmit, account, buttonText }: IProps) => {
             type="date"
             inputLabel="Data"
             value={date}
-            onChange={(e) => setDate(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setDate(e.target.value)}
           />
         </InputDateStyled>
         <ExpIncBtnGroup>
@@ -156,20 +156,20 @@ export const AccountForm = ({ handleSubmit, account, buttonText }: IProps) => {
             inputLabel="Kategoria"
             value={category}
             options={categoryList}
-            onChange={(option) => setCategory(option)}
+            onChange={(option: { label: string, value: string}) => setCategory(option)}
             onCreateOption={handleCreate}
           />
           <Input
             type="text"
             inputLabel="Nazwa"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
           />
           <Input
             type="number"
             inputLabel="Kwota"
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setAmount(e.target.value)}
           />
           <InputAttachment
             type="file"
