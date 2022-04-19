@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 interface ActivationView {
   id: string;
 }
- res
+ 
 const ActivationView = () => {
   const { id } = useParams();
   const navigate = useNavigate();
