@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import {useEffect, useState, useContext, ChangeEvent} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { apiUrl } from '../../utils/serverURL';
@@ -116,7 +116,7 @@ const MainPage = () => {
         placeholder="Wyszukaj"
         icon={'glass'}
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
         onSearchClick={filterList}
       />
       <StyledDateWrap>
@@ -125,7 +125,7 @@ const MainPage = () => {
             type="date"
             inputLabel="Początek zakresu"
             value={dateStart}
-            onChange={(e) => setDateStart(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setDateStart(e.target.value)}
           />
         </StyledDate>
         <StyledDate>
@@ -133,7 +133,7 @@ const MainPage = () => {
             type="date"
             inputLabel="Koniec zakresu"
             value={dateEnd}
-            onChange={(e) => setDateEnd(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setDateEnd(e.target.value)}
           />
         </StyledDate>
       </StyledDateWrap>

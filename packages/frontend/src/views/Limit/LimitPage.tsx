@@ -9,14 +9,14 @@ import {
   StyledLimitGroup,
 } from './LimitPage.styles';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import {ChangeEvent, useContext, useState} from 'react';
 import { AccountsContext } from '../../reducers/accounts.reducer';
 
 export default function LimitPage() {
   const { limitsState } = useContext(AccountsContext);
   const [, dispatch] = limitsState;
   const navigate = useNavigate();
-  const [amount, setAmount] = useState(null);
+  const [amount, setAmount] = useState<string | null>(null);
   const [category, setCategory] = useState('');
 
   const dataLimit = {
@@ -36,7 +36,7 @@ export default function LimitPage() {
         type="number"
         inputLabel="Kwota:"
         value={amount}
-        onChange={(e) => setAmount(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setAmount(e.target.value)}
       />
       <PrimaryButton
         className="xxx"

@@ -41,7 +41,7 @@ export const StyledText = styled.h3`
   color: #6a5f5f;
 `;
 
-export const StyledTextSpan = styled.span`
+export const StyledTextSpan = styled.span<{state: any}>`
   position: absolute;
   top: 50%;
   right: 0;
