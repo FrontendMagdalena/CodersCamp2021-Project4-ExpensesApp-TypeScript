@@ -1,7 +1,7 @@
 import { Schema, Types } from 'mongoose';
 import mongoose from 'mongoose';
 
-export interface ITransaction{
+export interface ITransaction {
   userID: {
     type: Types.ObjectId;
     required: boolean;
@@ -25,7 +25,7 @@ export interface ITransaction{
   date: {
     type: Date;
     required: boolean;
-  }
+  };
 }
 
 const TransactionsSchema = new Schema<ITransaction>({

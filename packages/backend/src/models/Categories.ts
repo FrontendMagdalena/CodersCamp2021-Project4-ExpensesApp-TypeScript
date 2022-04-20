@@ -1,7 +1,7 @@
 import { Schema, Types } from 'mongoose';
 import mongoose from 'mongoose';
 
-export interface ICategories{
+export interface ICategories {
   userID: {
     type: Types.ObjectId;
     ref: string;
@@ -34,7 +34,7 @@ const CategoriesSchema = new Schema<ICategories>({
   },
   color: {
     type: String,
-  }
+  },
 });
 
 export const Categories = mongoose.model('Categories', CategoriesSchema);
