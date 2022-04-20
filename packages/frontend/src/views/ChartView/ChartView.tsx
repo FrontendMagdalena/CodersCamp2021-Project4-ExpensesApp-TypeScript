@@ -10,11 +10,13 @@ import {
 } from './ChartView.styles';
 import Chart from '../../components/Chart/Chart';
 
+export IconButton expect
+
 export default function ChartView() {
   return (
     <>
       <ArrowButtonStyled>
-        <IconButton imageName={Arrow}></IconButton>
+        <IconButton imageName={Arrow}>string</IconButton>
       </ArrowButtonStyled>
       <StyledChartView>
         <StyledTitle>Wykres</StyledTitle>
