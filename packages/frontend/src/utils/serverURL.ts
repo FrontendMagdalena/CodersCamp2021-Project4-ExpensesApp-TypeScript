@@ -11,4 +11,4 @@ export const apiUrl = {
   categories: `${serverURL}/api/v1/categories`,
 };
 
-export const token = JSON.parse(localStorage.getItem('user'))?.token;
+export const token = JSON.parse(localStorage.getItem('user') as string)?.token;

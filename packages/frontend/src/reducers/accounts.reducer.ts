@@ -117,25 +117,15 @@ export const AccountsContext = createContext<IAccountState>({
     limitsState: [{list: {}}, () => null]
 });
 
-export const accountsReducer = (state: IAccount[], action: IAccountsAction) => {
+export const accountsReducer = (state: IAccount[], action: IAccountsAction) : IAccount[]  => {
     let newValue;
 
     switch (action.type) {
         case 'setInitialAccount':
-            return action.payload;
+            return action.payload as any;
         case 'addNewAccount':
             newValue = [...state, action.payload];
-            //   In order to save the data between the sessions, we save it temporary in LocalStorage.
-            // localStorage.setItem('accountsList', JSON.stringify(newValue));
-            return newValue;
-        // case 'editAccount':
-        //   // eslint-disable-next-line no-case-declarations
-        //   const filteredList = state.filter(
-        //     (item) => item.id !== action.payload.id,
-        //   );
-        //   newValue = [...filteredList, action.payload];
-        //   localStorage.setItem('accountsList', JSON.stringify(newValue));
-        //   return newValue;
+            return newValue as any;
         case 'deleteAccount':
             return state.filter((item) => item._id !== action.payload?.id);
         default:
@@ -143,7 +133,7 @@ export const accountsReducer = (state: IAccount[], action: IAccountsAction) => {
     }
 };
 
-export const limitsReducer = (state: ILimit, action: ILimitAction) => {
+export const limitsReducer = (state: ILimit, action: ILimitAction) : ILimit => {
     let newValue;
 
     switch (action.type) {
@@ -186,7 +176,7 @@ export const limitsReducer = (state: ILimit, action: ILimitAction) => {
                 },
             };
             localStorage.setItem('limits', JSON.stringify(newValue));
-            return newValue;
+            return newValue as any;
         default:
             return state;
     }
