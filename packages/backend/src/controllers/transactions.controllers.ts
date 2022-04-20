@@ -1,7 +1,15 @@
+import * as express from 'express';
+import mongoose from 'mongoose';
 import { Transactions } from '../models/Transactions';
 const sendErrorResponse = require('../utils/helpers').sendErrorResponse;
 
-const getTransactions = async (req, res) => {
+interface IUserRequest extends express.Request {
+  user: {
+    id: string;
+  };
+}
+
+const getTransactions = async (req: IUserRequest, res: express.Response) => {
   const userId = req.user.id;
 
   try {
@@ -12,7 +20,7 @@ const getTransactions = async (req, res) => {
   }
 };
 
-const getTransaction = async (req, res) => {
+const getTransaction = async (req: IUserRequest, res: express.Response) => {
   try {
     const transactions = await Transactions.findById(req.params.id);
 
@@ -22,9 +30,10 @@ const getTransaction = async (req, res) => {
   }
 };
 
-const addTransactions = async (req, res) => {
+const addTransactions = async (req: IUserRequest, res: express.Response) => {
   try {
-    const transaction = await Transactions(req.body);
+    // add new before Transactions(req.body) because of TS errors
+    const transaction = await new Transactions(req.body);
     transaction.save();
     res.json(transaction);
   } catch (error) {
@@ -32,7 +41,7 @@ const addTransactions = async (req, res) => {
   }
 };
 
-const updateTransaction = async (req, res) => {
+const updateTransaction = async (req: IUserRequest, res: express.Response) => {
   try {
     const transaction = await Transactions.findByIdAndUpdate(
       req.params.id,
@@ -45,7 +54,7 @@ const updateTransaction = async (req, res) => {
   }
 };
 
-const deleteTransaction = async (req, res) => {
+const deleteTransaction = async (req: IUserRequest, res: express.Response) => {
   try {
     const transaction = await Transactions.findByIdAndRemove(req.params.id);
     res.json(transaction);
