@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const StyledBurger = styled.div`
+export const StyledBurger = styled.div<{active: boolean}>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

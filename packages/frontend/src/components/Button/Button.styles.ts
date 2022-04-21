@@ -50,6 +50,8 @@ export const ExpensesStyledButton = styled.button.attrs((props) => ({
   font-family: 'Baloo 2', sans-serif;
   font-weight: 800;
   font-size: 15px;
+  //align-items: center;
+  margin-top: 50px;
 `;
 
 export const IncomeStyledButton = styled(ExpensesStyledButton).attrs({
