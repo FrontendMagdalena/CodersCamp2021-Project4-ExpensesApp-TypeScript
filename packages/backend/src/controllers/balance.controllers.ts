@@ -1,17 +1,25 @@
-const Transactions = require('../models/Transactions');
+import * as express from 'express';
+import { ITransaction, Transactions } from '../models/Transactions';
 const sendErrorResponse = require('../utils/helpers').sendErrorResponse;
 
-const getBalance = async (req, res) => {
+interface IUserRequest extends express.Request {
+  user: {
+    id: string;
+  };
+}
+
+const getBalance = async (req: IUserRequest, res: express.Response) => {
   const userId = req.user.id;
+
   try {
     const transactions = await Transactions.find({ userID: userId });
 
     const expenses = transactions
-      .filter((item) => item.type === 'Wydatek')
+      .filter((item) => (item.type as unknown as string) === 'Wydatek')
       .reduce((acc, item) => (acc += +item.amount), 0);
 
     const incomes = transactions
-      .filter((item) => item.type === 'Przychód')
+      .filter((item) => (item.type as unknown as string) === 'Przychód')
       .reduce((acc, item) => (acc += +item.amount), 0);
 
     const total = incomes - expenses;

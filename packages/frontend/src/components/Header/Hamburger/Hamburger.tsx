@@ -1,7 +1,11 @@
-import PropTypes from 'prop-types';
 import { StyledBurger, StyledLine } from "./Hamburger.styles";
 
-const Hamburger = ({ onShowNav, menuActive }) => {
+interface IProps {
+    onShowNav: () => void;
+    menuActive: boolean
+}
+
+const Hamburger = ({ onShowNav, menuActive }: IProps) => {
   return (
     <StyledBurger onClick={onShowNav} active={menuActive}>
       <StyledLine />
@@ -9,11 +13,6 @@ const Hamburger = ({ onShowNav, menuActive }) => {
       {menuActive ? null : <StyledLine />}
     </StyledBurger>
   );
-};
-
-Hamburger.propTypes = {
-  onShowNav: PropTypes.func,
-  menuActive: PropTypes.bool
 };
 
 export default Hamburger;

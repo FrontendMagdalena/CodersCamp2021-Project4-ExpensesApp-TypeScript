@@ -9,7 +9,7 @@ interface IProps {
 }
 const ListItem = ({ item, bgColor, onClick, isActive }: IProps) => {
   return (
-    <StyledItem bgcolor={bgColor} onClick={onClick} isActive={isActive}>
+    <StyledItem bgColor={bgColor} onClick={onClick} isActive={isActive}>
       {item.name}
     </StyledItem>
   );

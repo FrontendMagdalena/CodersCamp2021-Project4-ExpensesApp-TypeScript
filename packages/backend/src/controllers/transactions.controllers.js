@@ -1,4 +1,4 @@
-const Transactions = require('../models/Transactions');
+import { Transactions } from '../models/Transactions';
 const sendErrorResponse = require('../utils/helpers').sendErrorResponse;
 
 const getTransactions = async (req, res) => {

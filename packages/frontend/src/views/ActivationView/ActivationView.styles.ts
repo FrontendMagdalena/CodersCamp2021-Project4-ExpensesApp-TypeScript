@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import {string} from "prop-types";
 
 export const StyledDiv = styled.div`
   margin-top: 200px;

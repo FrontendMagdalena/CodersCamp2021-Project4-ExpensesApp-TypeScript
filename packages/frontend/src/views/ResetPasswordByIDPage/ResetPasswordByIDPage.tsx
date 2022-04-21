@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import {SubmitHandler, useForm} from 'react-hook-form';
 import { Input } from '../../components/Input/Input';
 import { PrimaryButton } from '../../components/Button/Button';
 import { IconButton } from '../../components/Button/Button';
@@ -12,6 +12,7 @@ import {
   StyledValidation,
 } from '../ResetPasswordPage/ResetPasswordPage.styles';
 import { serverURL } from '../../utils/serverURL';
+import {FormInputs} from "../ResetPasswordPage/ResetPasswordPage";
 
 const ResetPasswordByIDPage = () => {
   const { id } = useParams();
@@ -26,11 +27,11 @@ const ResetPasswordByIDPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormInputs>();
 
-  const onSubmit = (data, event) => {
+  const onSubmit: SubmitHandler<FormInputs> = (data, event) => {
     if (data.password === data.passwordSecond) {
-      const form = event.target;
+      const form = event?.target;
 
       setPassword(data.password);
       fetch(`${serverURL}/api/v1/users/reset-password/${id}`, {
@@ -69,7 +70,6 @@ const ResetPasswordByIDPage = () => {
           <StyledValidation>
             <Input
               type="password"
-              name="password"
               inputLabel="hasło:"
               {...register('password', {
                 required: 'Wpisz hasło, minimum 7 znaków',
@@ -83,7 +83,6 @@ const ResetPasswordByIDPage = () => {
           </StyledValidation>
           <StyledValidation>
             <Input
-              name="passwordSecond"
               type="password"
               inputLabel="powtórz hasło:"
               {...register('passwordSecond', {

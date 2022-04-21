@@ -24,7 +24,6 @@ export const PrimaryButton = (props: IPrimaryButton) => {
   return (
     <PrimaryStyledButton
       className={className}
-      text={text}
       isActive={isActive}
       onClick={onClick}
       alert={alert}

@@ -66,7 +66,7 @@ export const StyledTitle = styled.p`
     max-width: 90%;
     padding-left: 20px;
 `;
-export const StyledAmount = styled.p`
+export const StyledAmount = styled.p<{isExpense: boolean}>`
     display: flex;
     font-size: 15px;
     font-family: 'Baloo 2', sans-serif;
