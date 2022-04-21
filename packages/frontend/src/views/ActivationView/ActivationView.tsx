@@ -13,7 +13,6 @@ interface ActivationView {
   id: string;
 }
 
-
 const ActivationView = () => {
   const { id } = useParams();
   const navigate = useNavigate();
