@@ -12,9 +12,9 @@ export const PrimaryStyledButton = styled.button<{
     alert?: boolean,
 }>`
   padding: 12px 10px;
-  margin: 10px 20px 10px 20px;
-  min-width: 271px;
-  min-height: 64px;
+  margin: 15px auto 30px;
+  width: 271px;
+  height: 64px;
   background-color: ${(props) => (props.isActive ? '#638e2b' : '#8B8484')};
   color: #ffffff;
   border: none;
@@ -22,8 +22,7 @@ export const PrimaryStyledButton = styled.button<{
   font-family: 'Baloo 2', sans-serif;
   font-weight: 800;
   font-size: 26px;
-  margin-bottom: 30px;
-
+  
   ${(props) =>
           props.alert &&
           css`
@@ -51,7 +50,7 @@ export const ExpensesStyledButton = styled.button.attrs((props) => ({
   font-weight: 800;
   font-size: 15px;
   //align-items: center;
-  margin-top: 50px;
+  margin-top: 15px;
 `;
 
 export const IncomeStyledButton = styled(ExpensesStyledButton).attrs({
