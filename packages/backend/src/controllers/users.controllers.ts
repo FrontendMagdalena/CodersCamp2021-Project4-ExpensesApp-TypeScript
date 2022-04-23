@@ -1,12 +1,20 @@
+import * as express from 'express';
 const bcrypt = require('bcrypt');
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 require('dotenv').config();
 import { Users } from '../models/User';
+import { Types } from 'mongoose';
+
 const jwt = require('jsonwebtoken');
 
 const ObjectId = require('mongoose').Types.ObjectId;
 
-const loginUser = async (req, res) => {
+interface IUser {
+  _id: Types.ObjectId;
+  email: string;
+}
+
+const loginUser = async (req: express.Request, res: express.Response) => {
   const userExist = await Users.findOne({ email: req.body.email });
   if (userExist && userExist.isActive) {
     const passwordValidation = await bcrypt.compare(
@@ -34,7 +42,7 @@ transporter.verify((err, success) => {
   else console.log('ready for messages', success);
 });
 
-const verifyEmail = ({ _id, email }, res) => {
+const verifyEmail = ({ _id, email }: IUser, res: express.Response) => {
   const url = process.env.FRONT_URL;
 
   const mailOption = {
@@ -49,14 +57,14 @@ const verifyEmail = ({ _id, email }, res) => {
   transporter.sendMail(mailOption);
 };
 
-const isValidObjectId = (id) => {
+const isValidObjectId = (id: string) => {
   if (ObjectId.isValid(id)) {
     if (String(new ObjectId(id)) === id) return true;
     else return false;
   } else return false;
 };
 
-const activeUser = async (req, res) => {
+const activeUser = async (req: express.Request, res: express.Response) => {
   if (!isValidObjectId(req.body.userID))
     return res.status(400).send({ code: 0 });
 
@@ -67,7 +75,7 @@ const activeUser = async (req, res) => {
   } else res.status(400).send({ code: 0 });
 };
 
-const registerUser = async (req, res) => {
+const registerUser = async (req: express.Request, res: express.Response) => {
   const userExist = await Users.findOne({ email: req.body.email });
   if (userExist) res.status(409).send({ code: 0 });
   else {
@@ -81,7 +89,7 @@ const registerUser = async (req, res) => {
     user.password = await bcrypt.hash(user.password, salt);
 
     await user.save().then((result) => {
-      verifyEmail(result, res);
+      verifyEmail(result as any, res);
     });
     res.status(200).send({
       code: 1,
@@ -90,8 +98,11 @@ const registerUser = async (req, res) => {
   }
 };
 
-const sendResetPasswordEmail = ({ _id, email }, res) => {
-  const url = 'http://localhost:3000/';
+const sendResetPasswordEmail = (
+  { _id, email }: IUser,
+  res: express.Response,
+) => {
+  const url = process.env.FRONT_URL;
 
   const mailOption = {
     from: process.env.AUTH_EMAIL,
@@ -105,7 +116,7 @@ const sendResetPasswordEmail = ({ _id, email }, res) => {
   transporter.sendMail(mailOption);
 };
 
-const resetPassword = async (req, res) => {
+const resetPassword = async (req: express.Request, res: express.Response) => {
   const email = req.body.email;
   const userExist = await Users.findOne({ email });
 
@@ -122,7 +133,10 @@ const resetPassword = async (req, res) => {
   }
 };
 
-const resetPasswordById = async (req, res) => {
+const resetPasswordById = async (
+  req: express.Request,
+  res: express.Response,
+) => {
   if (!isValidObjectId(req.body.userID))
     return res.status(400).send({ code: 0 });
 
@@ -136,7 +150,7 @@ const resetPasswordById = async (req, res) => {
   res.status(200).send('Password reset sucessfully.');
 };
 
-const updatePassword = async (req, res) => {
+const updatePassword = async (req: express.Request, res: express.Response) => {
   if (!isValidObjectId(req.body.userID))
     return res.status(400).send({ code: 0 });
 
