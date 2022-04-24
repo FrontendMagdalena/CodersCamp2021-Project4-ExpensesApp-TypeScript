@@ -25,7 +25,6 @@ export const NewPosition = () => {
   const { accountsState, limitsState } = useContext(AccountsContext);
   const [list, dispatch] = accountsState;
   const [limits, limitsDispatch] = limitsState;
-  const token = JSON.parse(localStorage.getItem('user') as string)?.token;
   const navigate = useNavigate();
 
   const currentMonth = new Date().toISOString().slice(4, 7);
@@ -50,6 +49,7 @@ export const NewPosition = () => {
 
   const addTransaction = async (data: ITransactionData) => {
     const userID = JSON.parse(localStorage.getItem('user') as string).id;
+    const token = JSON.parse(localStorage.getItem('user') as string)?.token;
 
     const response = await fetch(apiUrl.transactions, {
       method: 'POST',
