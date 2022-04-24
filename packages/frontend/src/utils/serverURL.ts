@@ -1,7 +1,7 @@
 export const serverURL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : 'https://scrooge-f6e34.ondigitalocean.app';
+    : 'https://scrooge-f6e34.ondigitalocean.app:8080';
 console.log(`${process.env.NODE_ENV}`);
 console.log(`Server URL: ${serverURL}`);
 
