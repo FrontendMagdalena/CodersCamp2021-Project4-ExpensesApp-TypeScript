@@ -1,7 +1,7 @@
 export const serverURL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : process.env.BACKEND_URL;
+    : 'https://scrooge-f6e34.ondigitalocean.app';
 console.log(`${process.env.NODE_ENV}`);
 console.log(`Server URL: ${serverURL}`);
 
