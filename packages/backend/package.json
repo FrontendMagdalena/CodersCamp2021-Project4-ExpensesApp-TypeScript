@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon src/app.js",
+    "dev": "nodemon src/app.ts",
+    "start": "ts-node src/app.ts",
     "test": "jest"
   },
   "repository": {
@@ -23,7 +24,8 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.3",
-    "nodemailer": "^6.7.2"
+    "nodemailer": "^6.7.2",
+    "ts-node": "^10.7.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
@@ -36,6 +38,9 @@
   "jest": {
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
+    },
+    "engines": {
+      "node": "17.1.0",
     }
   }
 }
