@@ -1,6 +1,15 @@
 const jwt = require('jsonwebtoken');
+import * as express from 'express';
 
-exports.authToken = (req, res, next) => {
+interface IUserRequest extends express.Request {
+  user: string;
+}
+
+exports.authToken = (
+  req: IUserRequest,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
   const token = req.header('authorization-token');
   if (!token) return res.status(401).send('Access denied. No token provided.');
 
