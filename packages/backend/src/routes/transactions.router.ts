@@ -1,6 +1,9 @@
-const router = require('express').Router();
+import * as express from 'express';
+const router = express.Router();
 const {
-  getTransactions, getTransaction, addTransactions,
+  getTransactions,
+  getTransaction,
+  addTransactions,
   updateTransaction,
   deleteTransaction,
 } = require('../controllers/transactions.controllers');
