@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
-const Users = require('../models/User');
+import { Users } from '../models/User';
 const jwt = require('jsonwebtoken');
 
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -35,7 +35,7 @@ transporter.verify((err, success) => {
 });
 
 const verifyEmail = ({ _id, email }, res) => {
-  const url = proces.env.FRONT_URL;
+  const url = process.env.FRONT_URL;
 
   const mailOption = {
     from: process.env.AUTH_EMAIL,
