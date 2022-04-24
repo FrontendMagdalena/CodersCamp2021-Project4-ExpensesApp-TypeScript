@@ -1,4 +1,3 @@
-export {};
 import { Schema, Types } from 'mongoose';
 import mongoose from 'mongoose';
 

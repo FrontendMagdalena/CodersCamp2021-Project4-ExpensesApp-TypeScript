@@ -1,6 +1,14 @@
 import { apiUrl, token } from '../serverURL';
 
-export const updateAccountDetail = async (id, data) => {
+interface IProps {
+  category: string,
+  amount: string | null,
+  title: string,
+  date: string,
+  type: "Wydatek" | "Przychód"
+}
+
+export const updateAccountDetail = async (id: string, data:  IProps) => {
   await fetch(`${apiUrl.transactions}/${id}`, {
     method: 'PATCH',
     body: JSON.stringify(data),

@@ -16,7 +16,7 @@ const Header = () => {
     else return false;
   });
 
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState<boolean>(false);
   const isLogged = localStorage.getItem('userLogged') === 'true';
 
   const showNav = () => setActive((active) => !active);

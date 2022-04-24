@@ -14,18 +14,17 @@ import {
 } from './ResetPasswordPage.styles';
 import { serverURL } from '../../utils/serverURL';
 
+export type FormInputs = {
+  email: string;
+  password: string;
+  passwordSecond: string;
+};
 export default function ResetPasswordPage() {
   const [userEmail, setUserEmail] = useState('');
   const [messageTitle, setMessageTitle] = useState('Zapomniałeś hasła?');
   const [showLoginButton, setShowLoginButton] = useState(false);
   const [showResetButton, setShowResetButton] = useState(true);
   const navigate = useNavigate();
-
-  type FormInputs = {
-    email: string;
-    password: string;
-    passwordSecond: string;
-  };
 
   const {
     register,

@@ -1,4 +1,4 @@
-const Categories = require('../models/Categories');
+import { Categories } from '../models/Categories';
 const sendErrorResponse = require('../utils/helpers').sendErrorResponse;
 
 const getCategories = async (req, res) => {
