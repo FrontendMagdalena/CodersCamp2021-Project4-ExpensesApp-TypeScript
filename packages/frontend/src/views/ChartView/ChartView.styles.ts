@@ -21,10 +21,6 @@ export const InputDateStyled = styled.div`
   margin: 0 3px 0 3px;
 `;
 
-export const ArrowButtonStyled = styled.button`
-  margin: 5px auto 0px -20px;
-`;
-
 export const StyledTitle = styled.h2`
   margin-bottom: 26px;
   text-align: center;
