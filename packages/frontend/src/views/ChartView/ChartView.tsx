@@ -1,37 +1,36 @@
 import { IconButton, PrimaryButton } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
-import Arrow from '../../assets/arrow.png';
 import {
   StyledChartView,
   InputDateStyled,
-  ArrowButtonStyled,
   StyledTitle,
   InputDateStyledGrouped,
 } from './ChartView.styles';
 import Chart from '../../components/Chart/Chart';
+import {useNavigate} from 'react-router-dom';
+
 
 export default function ChartView() {
+  const navigate = useNavigate();
   return (
     <>
-      <ArrowButtonStyled>
-        <IconButton imageName={Arrow}></IconButton>
-      </ArrowButtonStyled>
+      <IconButton type="arrow" onClick={() => navigate(`/main`)}/>
       <StyledChartView>
         <StyledTitle>Wykres</StyledTitle>
         <InputDateStyledGrouped>
           <InputDateStyled>
-            <Input Input type="date" inputLabel="Data"></Input>
+            <Input Input type="date" inputLabel="Data"/>
           </InputDateStyled>
           <InputDateStyled>
-            <Input Input type="date" inputLabel="Data"></Input>
+            <Input Input type="date" inputLabel="Data"/>
           </InputDateStyled>
         </InputDateStyledGrouped>
         <PrimaryButton
           className="xxx"
           text="Potwierdź"
           isActive={true}
-        ></PrimaryButton>
-        <Chart></Chart>
+        />
+        <Chart/>
       </StyledChartView>
     </>
   );
