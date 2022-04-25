@@ -2,8 +2,7 @@ const dotenv = require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const router = require('./routes');
-const { authToken } = require('./middleware/auth');
+import { router } from './routes/index';
 const app = express();
 const PORT = process.env.PORT || 3000;
 

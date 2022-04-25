@@ -1,7 +1,14 @@
+import * as express from 'express';
 import { Categories } from '../models/Categories';
 const sendErrorResponse = require('../utils/helpers').sendErrorResponse;
 
-const getCategories = async (req, res) => {
+interface IUserRequest extends express.Request {
+  user: {
+    id: string;
+  };
+}
+
+const getCategories = async (req: IUserRequest, res: express.Response) => {
   const userId = req.user.id;
 
   const categories = await Categories.find({ userID: userId });
@@ -11,7 +18,7 @@ const getCategories = async (req, res) => {
   res.send(categories);
 };
 
-const getCategory = async (req, res) => {
+const getCategory = async (req: IUserRequest, res: express.Response) => {
   const category = await Categories.findById(req.params.id);
   if (!category) {
     res.status(404).send('Not found');
@@ -19,7 +26,7 @@ const getCategory = async (req, res) => {
   res.send(category);
 };
 
-const addCategory = async (req, res) => {
+const addCategory = async (req: IUserRequest, res: express.Response) => {
   try {
     const newCategory = new Categories({ ...req.body, user: req.user.id });
     await newCategory.save();
@@ -29,7 +36,7 @@ const addCategory = async (req, res) => {
   }
 };
 
-const removeCategory = async (req, res) => {
+const removeCategory = async (req: IUserRequest, res: express.Response) => {
   try {
     const removedCategory = await Categories.findByIdAndRemove(req.params.id);
     if (!removedCategory) {
@@ -41,7 +48,7 @@ const removeCategory = async (req, res) => {
   }
 };
 
-const updateCategory = async (req, res) => {
+const updateCategory = async (req: IUserRequest, res: express.Response) => {
   try {
     const updatedCategory = await Categories.findByIdAndUpdate(
       req.params.id,
