@@ -105,7 +105,7 @@ We use monorepo repository that holds frontend and backend in packages folder.
 
 To run this project locally clone repository:
 
-$ git clone https://github.com/FrontendMagdalena/CodersCamp2021-Project4-ExpensesApp-TypeScript
+$ git clone https://github.com/FrontendMagdalena/CodersCamp2021-Project4-ExpensesApp-TypeScript.git
 
 Install dependencies:
 
