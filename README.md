@@ -87,7 +87,7 @@ Backend:
   
 &nbsp;
 
-##Development
+## Development
 
 🌵 Branches
 1. dev is the development branch.
@@ -97,7 +97,7 @@ Backend:
 
 We use monorepo repository that holds frontend and backend in packages folder. 
 
-![](packages/frontend/src/assets/readme/File structure.png)
+![](packages/frontend/src/assets/readme/FileStructure.png)
 
 &nbsp;
 
@@ -127,6 +127,6 @@ The app is available at http://localhost:3001 and the API at http://localhost:30
 
 &nbsp;
 
-##Deployment
+## Deployment
 
 We have deployed our app using DigitalOcean platform, and it is available at https://scrooge-f6e34.ondigitalocean.app/
