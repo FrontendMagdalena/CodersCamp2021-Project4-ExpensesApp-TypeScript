@@ -105,24 +105,27 @@ We use monorepo repository that holds frontend and backend in packages folder.
 
 To run this project locally clone repository:
 
-$ git clone https://github.com/FrontendMagdalena/CodersCamp2021-Project4-ExpensesApp-TypeScript.git
-
+```sh
+git clone https://github.com/FrontendMagdalena/CodersCamp2021-Project4-ExpensesApp-TypeScript.git
+```
 Install dependencies:
-
+```sh
 npm install
-
+```
 Split terminal to two windows:
 
 Start local server:
 
 1/ backend:
 
+```sh
 npm run start:server 
-
+```
 2/ frontend:
 
+```sh
 npm run start:client
-
+```
 The app is available at http://localhost:3001 and the API at http://localhost:3000/api/
 
 &nbsp;
